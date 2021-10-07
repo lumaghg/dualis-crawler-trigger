@@ -73,18 +73,21 @@ func HandleRequest() error {
 			if err != nil {
 				log.Fatalf("Got error unmarshalling: %s", err)
 				errChan <- err
+				return
 			}
 
 			payload, err := json.Marshal(user)
 			if err != nil {
 				log.Fatal(err)
 				errChan <- err
+				return
 			}
 
 			_, err = lambdaClient.Invoke(&lambdaService.InvokeInput{FunctionName: aws.String("triggerScrapeGradesAndNotify"), Payload: payload})
 			if err != nil {
 				fmt.Println("Error calling MyGetItemsFunction")
 				errChan <- err
+				return
 			}
 		}()
 
