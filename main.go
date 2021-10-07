@@ -67,7 +67,8 @@ func HandleRequest() error {
 		wg.Add(1)
 		go func(errChan chan error) {
 			defer wg.Done()
-
+			defer fmt.Println("one done")
+			fmt.Println("one start")
 			user := User{}
 			err = dynamodbattribute.UnmarshalMap(userMap, &user)
 			fmt.Println(user)
