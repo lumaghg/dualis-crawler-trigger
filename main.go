@@ -70,6 +70,7 @@ func HandleRequest() error {
 
 			user := User{}
 			err = dynamodbattribute.UnmarshalMap(userMap, &user)
+			fmt.Println(user)
 			if err != nil {
 				log.Fatalf("Got error unmarshalling: %s", err)
 				errChan <- err
@@ -92,8 +93,9 @@ func HandleRequest() error {
 		}()
 
 	}
-
+	fmt.Println("start the wait")
 	wg.Wait()
+	fmt.Println("end the wait")
 	if len(errChan) > 0 {
 		return err
 	}
