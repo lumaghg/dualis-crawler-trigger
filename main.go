@@ -65,7 +65,7 @@ func HandleRequest() error {
 	for _, userMap := range result.Items {
 
 		wg.Add(1)
-		go func() {
+		go func(errChan chan error) {
 			defer wg.Done()
 
 			user := User{}
@@ -90,7 +90,7 @@ func HandleRequest() error {
 				errChan <- err
 				return
 			}
-		}()
+		}(errChan)
 
 	}
 	fmt.Println("start the wait")
