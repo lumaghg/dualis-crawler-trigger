@@ -86,7 +86,7 @@ func HandleRequest() error {
 				return
 			}
 
-			_, err = lambdaClient.Invoke(&lambdaService.InvokeInput{FunctionName: aws.String("triggerScrapeGradesAndNotify"), Payload: payload})
+			_, err = lambdaClient.Invoke(&lambdaService.InvokeInput{FunctionName: aws.String("scrapeGradesAndNotify"), InvocationType: aws.String("Event"), Payload: payload})
 			if err != nil {
 				fmt.Println("Error calling MyGetItemsFunction")
 				errChan <- err
