@@ -66,6 +66,7 @@ func HandleRequest() error {
 
 		wg.Add(1)
 		go func(errChan chan error) {
+			//TODO function doesnt end
 			defer wg.Done()
 			defer fmt.Println("one done")
 			fmt.Println("one start")
